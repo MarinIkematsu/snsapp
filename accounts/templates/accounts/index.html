@@ -1,0 +1,46 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Ham -index-{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3" style="font-family: 'Shadows Into Light', cursive;">
+                <!-- 説明文・紹介文をいれようかな・・・？ -->
+                <div class="text-center mt-2">
+                    <h4>Welcome to Hamtter</h4>
+                    <br>
+                    <div style="font-size: small;">
+                        <p>
+                            <span>ここではみんなと投稿をシェアできます</span>
+                            <br>
+                            <span>じぶんの気持ちや思い出をつぶやきましょう！</span>
+                            <br>
+                            <span>Hamtterのなかまになりましょう！</span>
+                            <br>
+                            <br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <!-- サインアップページへの移動 -->
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-secondary rounded-pill px-4 py-2 me-2">
+                        <i class="fas fa-user-plus fa-lg me-2"></i> signup
+                    </a>
+                </div>
+                <div class="text-center mt-4">
+                    <!-- ログインページへの移動 -->
+                    <a href="{% url 'accounts:signin' %}" class="btn btn-outline-secondary rounded-pill px-4 py-2 me-2">
+                        <i class="fas fa-sign-in-alt fa-lg me-2"></i> login
+                    </a>
+                </div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+{% endblock %}

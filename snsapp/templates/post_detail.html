@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Ham -DETAIL-{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8" style="font-family: 'Shadows Into Light', cursive;">
+            <h2 class="text-center mb-4">details</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ post.title }}</h3>
+                    <p class="card-text">{{ post.content }}</p>
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="img-fluid" alt="{{ post.title }}">
+                    {% endif %}
+                </div>
+                <div class="card-footer text-center">
+                    <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> 戻る
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

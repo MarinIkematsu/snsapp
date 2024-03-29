@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block title %}Ham -HOME-{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center" style="font-family: 'Shadows Into Light', cursive;">
+        <div style="font-size: smaller;">
+        Home-Resident User
+        </div>
+        <p>
+            <span style="width: 7px; height: 7px; border-radius: 50%; display: inline-block; background-color: rgb(0, 190, 0); margin-right: 2px; box-shadow: 0 0 10px green;"></span>
+            <span>{{ user.username }}</span>
+        </p>
+    </div>
+    <div class="text-center">
+        <a href="{% url 'snsapp:post_create' %}" class="btn btn-outline-dark btn-sm mb-4"  style="box-shadow: 0 4px 8px rgba(0,0,0,0.1); font-family: 'Shadows Into Light', cursive;">
+            <i class="fas fa-plus"></i> 投稿
+        </a>
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            <!-- 投稿一覧をまとめたカード -->
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <!-- カードのヘッダー -->
+                <div class="card-header bg-white" style="font-family: 'Shadows Into Light', cursive;">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="m-0" style="color: #595959;">
+                            <span style="margin-left: 10px; color: #595959;"><i class="fas fa-seedling"></i></span>
+                            Post
+                        </h3>
+                    </div>
+                </div>
+                <!-- カードの本体（投稿の表示） -->
+                <div class="card-body" style="font-family: 'Shadows Into Light', cursive;">
+                    {% for post in posts %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <!-- 投稿のタイトル -->
+                                <h5 class="card-title font-weight-bold mb-0" style="margin-left: 5px;">
+                                    <a href="{% url 'snsapp:post_detail' post.pk %}" class="text-decoration-none" style="color: #595959;">{{ post.title }}</a>
+                                </h5>
+                                <!-- 投稿者 -->
+                                <small class="text-muted d-flex align-items-center" style="margin-right: 5px;">
+                                    <i class="fas fa-user-circle me-2" style="font-size: 1.5rem;"></i><span>{{ post.user }}</span>
+                                </small>                               
+                            </div>
+                            <hr class="my-2">
+                            <!-- 投稿の本文 -->
+                            <p class="card-text mb-1" style="color: #4D4D4D; margin-left: 5px;">{{ post.content }}</p>
+                            <!-- 投稿の画像（投稿時に画像があれば・・・） -->
+                            {% if post.image %}
+                            <img src="{{ post.image.url }}" class="card-img-top mt-2" alt="{{ post.title }}">
+                            {% endif %}
+                        </div>
+                        <!-- 投稿ごとの各機能（詳細・編集・削除）本来はMyHomeページのみで使うもの -->
+                        <div class="card-footer bg-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <a href="{% url 'snsapp:post_detail' post.pk %}" class="btn btn-link" title="詳細ページに移動します"><i class="fas fa-file" style="color: #C0C0C0;"></i></a><!--詳細-->
+                                    <a href="{% url 'snsapp:post_edit' post.pk %}" class="btn btn-link" title="編集ページに移動します"><i class="fas fa-edit" style="color: #C0C0C0;"></i></a><!--編集-->
+                                    <a href="{% url 'snsapp:post_delete' post.pk %}" class="btn btn-link" title="削除ページに移動します"><i class="fas fa-trash-alt" style="color: #C0C0C0;"></i></a><!--削除-->
+                                </div>
+                                <!-- 投稿時の時間の表示 -->
+                                <small class="text-muted"><i class="far fa-clock"></i> {{ post.created_at|date:"Y/m/d H:i" }}</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+{% endblock %}

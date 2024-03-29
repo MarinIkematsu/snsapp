@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Ham -POST-{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3" style="font-family: 'Shadows Into Light', cursive;">
+            <h2 class="text-center mb-4">new post</h1>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <!-- タイトル入力フォーム -->
+                <div class="mb-3">
+                    <label for="id_title" class="form-label"><i class="fas fa-leaf"></i> title</label>
+                    <input type="text" class="form-control" id="id_title" name="title" placeholder="タイトルを入力してください">
+                </div>
+                <!-- 画像選択フォーム -->
+                <div class="mb-3">
+                    <label for="id_image" class="form-label"><i class="fas fa-image"></i> picture</label>
+                    <input type="file" class="form-control" id="id_image" name="image" onchange="previewImage(this)">
+                    <img id="imagePreview" class="mt-2 img-thumbnail mx-auto d-block" style="display: none; max-width: 200px;">
+                </div>
+                
+                <!-- 本文入力フォーム -->
+                <div class="mb-3">
+                    <label for="id_content" class="form-label"><i class="fas fa-pencil-alt"></i> content</label>
+                    <textarea class="form-control" id="id_content" name="content" rows="5" placeholder="内容を入力してください"></textarea>
+                </div>
+                <!-- 投稿ボタン -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary"><i class="fas fa-paper-plane"></i> 投稿する</button>
+                    <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> 戻る
+                    </a>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

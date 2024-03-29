@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}Ham -EDIT-{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3"  style="font-family: 'Shadows Into Light', cursive;">
+            <h1 class="text-center mb-4">edit post</h1>
+            <form method="post">
+                {% csrf_token %}
+                <!-- タイトル入力フォーム -->
+                <div class="mb-3">
+                    <label for="id_title" class="form-label"><i class="fas fa-leaf"></i> title</label>
+                    <input type="text" class="form-control" id="id_title" name="title" value="{{ post.title }}">
+                </div>
+                <!-- 画像選択フォーム -->
+                <div class="mb-3">
+                    <label for="id_image" class="form-label"><i class="fas fa-image"></i> picture</label>
+                    <input type="file" class="form-control" id="id_image" name="image">
+                </div>
+                
+                <!-- 本文入力フォーム -->
+                <div class="mb-3">
+                    <label for="id_content" class="form-label"><i class="fas fa-pencil-alt"></i> content</label>
+                    <textarea class="form-control" id="id_content" name="content" rows="5">{{ post.content }}</textarea>
+                </div>
+                <!-- 更新ボタン -->
+                <div class="text-center">
+                    <button type="submit" class="btn btn-outline-primary"><i class="fas fa-sync"></i> 更新</button>
+                    <a href="javascript:history.back()" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left"></i> 戻る
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}My Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="text-center">
+        <a href="{% url 'snsapp:post_create' %}" class="btn btn-outline-dark btn-sm mb-4" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <i class="fas fa-plus"></i> 投稿
+        </a>
+    </div>
+
+
+    <!-- ユーザー認証ができ次第、HomeとMyHomeの分割を実装 -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card" style="box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <div class="card-header bg-white">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h3 class="m-0" style="color: #595959;">
+                            <span style="margin-left: 10px; color: #595959;"><i class="fas fa-clipboard"></i></span>
+                            My Posts
+                        </h3>
+                    </div>
+                </div>
+                <div class="card-body" style="font-family: 'Shadows Into Light', cursive;">
+                    {% if user_posts %}
+                        {% for post in user_posts %}
+                            <div class="card mb-3">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title font-weight-bold mb-0" style="margin-left: 5px;">
+                                            <a href="{% url 'snsapp:post_detail' post.pk %}" class="text-decoration-none" style="color: #595959;">{{ post.title }}</a>
+                                        </h5>
+                                        <small class="text-muted d-flex align-items-center" style="margin-right: 5px;">
+                                            <i class="fas fa-user-circle me-2" style="font-size: 1.5rem;"></i><span>{{ post.user }}</span>
+                                        </small>                               
+                                    </div>
+                                    <hr class="my-2">
+                                    <p class="card-text mb-1" style="color: #4D4D4D; margin-left: 5px;">{{ post.content }}</p>
+                                    {% if post.image %}
+                                        <img src="{{ post.image.url }}" class="card-img-top mt-2" alt="{{ post.title }}">
+                                    {% endif %}
+                                </div>
+                                <div class="card-footer bg-white">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <a href="{% url 'snsapp:post_detail' post.pk %}" class="btn btn-link" title="詳細ページに移動します"><i class="fas fa-file" style="color: #C0C0C0;"></i></a><!--詳細-->
+                                            <a href="{% url 'snsapp:post_edit' post.pk %}" class="btn btn-link" title="編集ページに移動します"><i class="fas fa-edit" style="color: #C0C0C0;"></i></a><!--編集-->
+                                            <a href="{% url 'snsapp:post_delete' post.pk %}" class="btn btn-link" title="削除ページに移動します"><i class="fas fa-trash-alt" style="color: #C0C0C0;"></i></a><!--削除-->
+                                        </div>
+                                        <small class="text-muted"><i class="far fa-clock"></i> {{ post.created_at|date:"Y/m/d H:i" }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>No posts yet.</p>
+                        <p>ログイン中ユーザーの投稿がありません</p>
+                    {% endif %}
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+{% endblock %}

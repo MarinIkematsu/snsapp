@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Ham -LOGOUT-{% endblock %}
+
+{% block content %}
+<div class="container"  style="font-family: 'Shadows Into Light', cursive;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">ログアウト</h2>
+                    <p class="text-center">本当にログアウトしますか？</p>
+                    <div class="text-center mt-3">
+                        <!-- ログアウトのフォーム -->
+                        <form method="post" action="{% url 'accounts:signout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-primary rounded-pill me-3">はい</button>
+                            <a href="{% url 'snsapp:profile' %}" class="btn btn-outline-secondary rounded-pill">いいえ</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'accounts/base.html' %}
+
+{% block title %}Ham -SIGNUP-{% endblock %}
+
+{% block content %}
+<div class="container"  style="font-family: 'Shadows Into Light', cursive;">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Sign Up</h2>
+                    <!-- サインアップのフォーム -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label"><i class="fas fa-user" style="font-size: small;"></i> username</label>
+                            <input type="text" name="username" class="form-control rounded-pill" id="id_username" placeholder="ユーザー名を入力してください" style="font-size: small;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_email" class="form-label"><i class="fas fa-envelope" style="font-size: small;"></i> email</label>
+                            <input type="email" name="email" class="form-control rounded-pill" id="id_email" placeholder="メールアドレスを入力してください" style="font-size: small;">
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_password" class="form-label"><i class="fas fa-key" style="font-size: small;"></i> password</label>
+                            <input type="password" name="password" class="form-control rounded-pill" id="id_password" placeholder="パスワードを入力してください" style="font-size: small;">
+                        </div>
+                        <br>
+                        <div class="mb-3 text-center">
+                            <button type="submit" class="btn btn-outline-primary btn btn-block rounded-pill mx-auto">Sign Up</button>
+                        </div>
+                    </form>
+
+
+                    <!-- <form method="post">
+                        {% csrf_token %}
+                        {% for field in form %}
+                            <p>
+                                {{ field.label_tag }}<br>
+                                {{ field }}
+                            </p>
+                        {% endfor %}
+                        <input type="submit" value="Sign Up">
+                    </form> -->
+                    
+                    <!-- ログインページへの移動 -->
+                    <div class="text-center mt-3">
+                        <p class="mb-0">アカウントをお持ちの方は</p>
+                        <a href="{% url 'accounts:signin' %}" class="btn btn-link">
+                            <i class="fas fa-sign-in-alt me-1"></i> ログイン
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
